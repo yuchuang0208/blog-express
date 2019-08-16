@@ -8,8 +8,8 @@ var logger = require('morgan');
 
 // var indexRouter = require('./routes/index');                //路由
 // var usersRouter = require('./routes/users');
-let blogRouter = require('./routes/blog');                  //博客路由
-let userRouter = require('./routes/user');                  //用户路由
+let blogRouter = require('./routes/blog');                  //注册博客路由
+let userRouter = require('./routes/user');                  //注册用户路由
 
 var app = express();                                        //初始化app实例
 
@@ -41,8 +41,8 @@ app.use(express.static(path.join(__dirname, 'public')));     //注册静态文�
 
 // app.use('/', indexRouter);                                   //处理路由
 // app.use('/users', usersRouter);
-app.use('/api/blog', blogRouter);                                //注册处理博客路由
-app.use('/api/user', userRouter);                                //注册处理用户路由
+app.use('/api/blog', blogRouter);                                //处理博客路由设置根路由
+app.use('/api/user', userRouter);                                //处理用户路由设置根路由
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {                           //访问一个错误的路由进行友好的提示
@@ -53,7 +53,7 @@ app.use(function(req, res, next) {                           //访问一个错�
 app.use(function(err, req, res, next) {                      //处理错误抛出
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {}; //区分环境
+  res.locals.error = req.app.get('env') === 'dev' ? err : {}; //区分环境
 
   // render the error page
   res.status(err.status || 500);
